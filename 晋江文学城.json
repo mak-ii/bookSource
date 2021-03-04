@@ -13,7 +13,7 @@
     "enabledExplore": true,
     "weight": 0,
     "customOrder": -38223,
-    "lastUpdateTime": 1614828020099,
+    "lastUpdateTime": 1614831565901,
     "ruleSearch": {
         "bookList": "<js>\nkey=java.get('key');\npage=java.get('page');\n\n//创建两个空数组\njson=[];json2=[];\n\n//判定json里是否有items\nif(JSON.parse(result).items){\njson=JSON.parse(result).items;}\n\n//加载作者搜索页面并转为json\njson1=JSON.parse(java.ajax('http://android.jjwxc.net/androidapi/search?keyword='+key+'&type=2&page='+page+'&searchType=2&sortMode=DESC'));\n\n//判定json里是否有items\nif(json1.items){\njson2=json1.items\n}\n\n//书名搜索列表与作者搜索列表拼接\nlist=json.concat(json2);\n\n\nresult=JSON.stringify(list)\n</js>\n$.[*]",
         "name": "$.novelname||$.novelName@put:{id:$.novelid||$.novelId}",
@@ -48,9 +48,9 @@
     },
     "ruleToc": {
         "chapterList": "<js>last=JSON.parse(java.ajax('http://android.jjwxc.net/androidapi/chapterList?novelId='+java.get('id'))).chapterlist;\nlast=last[last.length-1];\nlist=JSON.parse(result).chapterlist;\nlist.push(last);\nJSON.stringify(list)\n</js>\n$.[*]",
-        "chapterName": "$.chaptername\n@js:\nvip='{{$.isvip}}'!='0';\nlock='{{$.islock}}'!='0';\ntype='{{$.chaptertype}}'=='1';\nnum=!type?'{{$.chapterid}}.':'';\nresult=type?'📖'+result+'📖':result;\nv=vip?'◎':'';l=lock?'[锁]':'';\nresult=v+num+result+l;",
+        "chapterName": "$.chaptername\n@js:\nvip='{{$.isvip}}'!='0';\nlock='{{$.islock}}'!='0';\ntype='{{$.chaptertype}}'=='1';\nnum=!type?'{{$.chapterid}}.':'';\nresult=type?'📖'+result+'📖':result;\nv=vip?'🔒':'';l=lock?'[锁]':'';\nresult=v+num+result+l;",
         "chapterUrl": "$.chapterid\n@js:\nvip='{{$.isvip}}'!='0';\ntype='{{$.chaptertype}}'=='1';\nif(!vip){\nif(!type){\nresult='https://m.jjwxc.net/book2/'+java.get('id')+'/'+result\n}else{result='http://www.baidu.com?wd='+result}\n}else{result='https://wap.jjwxc.net/vip/'+java.get('id')+'/'+result}",
-        "updateTime": "{{$.chapterdate}}•{{$.chapterintro##^\\s*}}•{{$.pointMeassge}}##^•|•0晋江币|0000-00-00.*"
+        "updateTime": "{{$.chapterdate}}•{{$.chapterintro##^\\s*}}•{{$.pointMeassge}}•{{$.chaptersize}}字##^•|•0晋江币|0000-00-00.*"
     },
     "ruleContent": {
         "content": "class.b module@tag.li.0@textNodes&&class.b module@tag.li.1@textNodes&&class.noveltext@textNodes##网友：|评分：|.*分\\｜.{4}|选择 章节 标题 需要点数[\\s\\S]+",
